@@ -1,9 +1,10 @@
 import React  from "react"
-import {useLocation} from 'react-router-dom';
-
+import {useLocation,useNavigate} from 'react-router-dom'
+import  './style.css';
 
 function Home (){
-    const location=useLocation()
+    const location = useLocation()
+    const history = useNavigate()
     const email = location.state.id
     const username = email.substring(0, email.indexOf('@'));
     const getAge = () => {
@@ -22,6 +23,11 @@ function Home (){
         const randomNumber = String(Math.floor(Math.random() * 9000000000) + 1000000000); // Generates a random 10-digit mobile number
         const formattedNumber = `${randomNumber.substring(0, 3)}-${randomNumber.substring(3, 6)}-${randomNumber.substring(6)}`;
         return formattedNumber;
+      };
+
+      const handleLogout = () => {
+     
+        history('/')
       };
     
       const age = getAge();
@@ -47,7 +53,7 @@ function Home (){
             </div>
             </center>
            
-
+            <button onClick={handleLogout} class="btn btn-primary">Logout</button>
         </div>
     )
 }
