@@ -20,8 +20,6 @@ const uri ="mongodb+srv://<username>:votechain%402023@<cluster-name>.frbqx.mongo
 // })
 
 
-
-
 const newSchema=new mongoose.Schema({
     name:{
         type:String,
