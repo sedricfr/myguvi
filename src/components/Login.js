@@ -23,8 +23,8 @@ const validateEmail = () => {
   };
   
   const validatePassword = () => {
-    if (password.length < 8) {
-      setPasswordError('Password must be at least 8 characters long');
+    if (password.length < 4) {
+      setPasswordError('Password must be at least 4 characters long');
     } else {
       setPasswordError('');
     }
