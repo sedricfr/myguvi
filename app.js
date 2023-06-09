@@ -1,5 +1,8 @@
 const express = require("express")
+const mongoose= require("mongoose")
 const collection = require("./mongo")
+const uri ="mongodb+srv://vcai:votechain%402023@clustervcai.rdtq9yy.mongodb.net/react-login-tut?retryWrites=true&w=majority";
+
 const cors = require("cors")
 const app = express()
 app.use(express.json())
@@ -63,6 +66,17 @@ app.post("/signup",async(req,res)=>{
 
 })
 
+
+async function connect() {
+    try {
+      await mongoose.connect(uri);
+      console.log("Connected to MongoDB");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  connect();
 app.listen(3000,()=>{
     console.log("port connected");
 })
