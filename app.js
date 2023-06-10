@@ -50,7 +50,7 @@ app.post("/signup",async(req,res)=>{
 
     try{
         const check=await collection.findOne({email:email})
-
+collection.f
         if(check){
             res.json("exist")
         }
@@ -76,6 +76,7 @@ async function connect() {
   }
 
   connect();
+
 app.listen(3000,()=>{
     console.log("port connected");
 })
