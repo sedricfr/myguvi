@@ -66,7 +66,6 @@ app.post("/signup",async(req,res)=>{
 
 })
 
-
 async function connect() {
     try {
       await mongoose.connect(uri);
