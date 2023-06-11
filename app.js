@@ -9,7 +9,15 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
-
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+  
+    const path = require('path');
+    app.get('*', (req,res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+  
+  }
 
 app.get("/",cors(),(req,res)=>{
 
@@ -77,7 +85,10 @@ async function connect() {
 
   connect();
 
-app.listen(3000,()=>{
-    console.log("port connected");
-})
+  const port = process.env.PORT || 3000;
+
+
+  app.listen(port, () => {
+    console.log(`App is listening on port ${port}`);
+  });
 
