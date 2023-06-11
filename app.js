@@ -7,24 +7,16 @@ const cors = require("cors")
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors())
+app.use(cors({ origin: 'https://tubular-cheesecake-ac28b9.netlify.app'}))
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-  
-    const path = require('path');
-    app.get('*', (req,res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-    })
-  
-  }
+
 
 app.get("/",cors(),(req,res)=>{
 
 })
 
 
-app.post("/",async(req,res)=>{
+app.post("https://tubular-cheesecake-ac28b9.netlify.app/",async(req,res)=>{
     const{email,password}=req.body
 
     try{
@@ -46,7 +38,7 @@ app.post("/",async(req,res)=>{
 
 
 
-app.post("/signup",async(req,res)=>{
+app.post("https://tubular-cheesecake-ac28b9.netlify.app/signup",async(req,res)=>{
     const{name,email,password,cpass}=req.body
 
     const data={
@@ -58,7 +50,7 @@ app.post("/signup",async(req,res)=>{
 
     try{
         const check=await collection.findOne({email:email})
-collection.f
+
         if(check){
             res.json("exist")
         }
