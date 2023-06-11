@@ -54,7 +54,7 @@ function Signup() {
 
         try{
 
-            await axios.post("http://localhost:3000/signup",{
+            await axios.post("https://tubular-cheesecake-ac28b9.netlify.app//signup",{
                 name,email,password,cpass
                 
             })

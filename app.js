@@ -7,7 +7,7 @@ const cors = require("cors")
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors())
+app.use(cors({ origin: 'https://tubular-cheesecake-ac28b9.netlify.app' }))
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'production') {
   
   }
 
-app.get("/",cors(),(req,res)=>{
+app.get("/",(req,res)=>{
 
 })
 
