@@ -36,7 +36,7 @@ const validateEmail = () => {
 
         try{
 
-            await axios.post("http://localhost:3000/",{
+            await axios.post("https://tubular-cheesecake-ac28b9.netlify.app/",{
                 email,password
             })
             .then(res=>{
