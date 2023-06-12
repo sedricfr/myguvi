@@ -16,7 +16,7 @@ mongoose.connect(MONGO_CONNECTION,{useNewUrlParser:true})
     console.log(err.message);
 })
 
-app.get("/",route)
+app.use("/",route)
 
 
 app.listen(port, () => {
