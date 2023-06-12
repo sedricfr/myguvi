@@ -35,15 +35,29 @@ const register = async (req, res) => {
       return res.status(400).json("Please enter password");
     }
     const Passregx =
-      /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&])[a-zA-Z0-9@#$%&]{4,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%&]).{6,}$/;
     let Password = Passregx.test(Body.password);
     if (!Password) {
       return res
         .status(400)
         .json(
-          "Password must have atleast 1 uppercase\n, 1 lowercase, 1 special charecter\n 1 number and must consist atleast 4 characters."
+          "Password must have atleast 1 uppercase\n, 1 lowercase, 1 special charecter\n 1 number and must consist atleast 6 characters."
         );
     }
+
+    if (!Body.cpass) {
+      return res.status(400).json("Please re-enter password");
+    }
+    const cPassregx =Body.password
+    let cnf= (cPassregx === Body.password);
+    if (!Password) {
+      return res
+        .status(400)
+        .json(
+          "Password must have atleast 1 uppercase\n, 1 lowercase, 1 special charecter\n 1 number and must consist atleast 6 characters."
+        );
+    }
+
     //const salt = await bcrypt.genSalt(10);
     //req.body.password = await bcrypt.hash(req.body.password, salt);
 
