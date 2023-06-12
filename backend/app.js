@@ -7,7 +7,7 @@ const cors = require("cors")
 const app = express()
 app.use(express.json())
 
-app.use(cors({ origin: 'https://tubular-cheesecake-ac28b9.netlify.app' }))
+app.use(cors({ origin:'https://tubular-cheesecake-ac28b9.netlify.app'}))
 
 mongoose.connect(MONGO_CONNECTION,{useNewUrlParser:true})
 .then(()=>{
