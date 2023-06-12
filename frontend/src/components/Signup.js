@@ -56,8 +56,16 @@ function Signup() {
 
         try{
 
+<<<<<<< HEAD:frontend/src/components/Signup.js
             await axios.post("https://myguvi-backend.onrender.com/api/user/signup",inputs);
   /*
+=======
+            await axios.post("https://tubular-cheesecake-ac28b9.netlify.app/signup",{
+                name,email,password,cpass
+                
+            })
+            .then(res=>{
+>>>>>>> b33d022638d3151e7b48b84d8e400a8706e3a5a0:src/components/Signup.js
                 if(res.data==="exist"){
                     alert("User already exists")
                 }
