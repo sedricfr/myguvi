@@ -55,7 +55,7 @@ const register = async (req, res) => {
     }
     const cPassregx =Body.password
     let cnf= (cPassregx === Body.password);
-    if (!Password) {
+    if (!cnf) {
       return res
         .status(400)
         .json(
