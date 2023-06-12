@@ -67,9 +67,10 @@ const register = async (req, res) => {
     //req.body.password = await bcrypt.hash(req.body.password, salt);
 
     let savedData = await userModel.create(Body);
-    res.status(201).send({ data: savedData });
-  } catch (error) {
-    return res.status(500).json(error.message);
+    
+     return res.status(200).send(getUser._id.toString());
+    } catch (error) {
+      return res.status(500).json(error.message);
   }
 };
 
