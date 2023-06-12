@@ -13,7 +13,6 @@ function Signup() {
       cpass: ""
     });
     const [err, setError] = useState(null);
-
     const handleChange = (e) => {
       setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
@@ -74,8 +73,9 @@ function Signup() {
                    }*/
                     history('/login');
         }
-        catch(e){
-            console.log(e);
+        catch(err){
+            console.log(err);
+            setError(err.response.data);
 
         }
 
@@ -133,7 +133,7 @@ function Signup() {
 
           <br /><br />
                 <input type="submit"class="btn btn-primary" onClick={submit} />
-
+                {err && <p>{err}</p>}
             </form>
             </center>
             
