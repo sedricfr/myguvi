@@ -1,6 +1,7 @@
-import React  from "react"
+import React , { useContext} from "react"
 import {useLocation,useNavigate} from 'react-router-dom'
 import  './style.css';
+import { AuthContext } from "../auth/Authcontext";
 
 function Home (){
     const location = useLocation()
@@ -25,8 +26,11 @@ function Home (){
         return formattedNumber;
       };
 
-      const handleLogout = () => {
-     
+      const {logout} = useContext(AuthContext);
+
+      async function handleLogout() {
+       await logout();
+       alert('"User has been logged out !!')
         history('/')
       };
     

@@ -6,16 +6,18 @@ import  './style.css';
 
 function Signup() {
     const history=useNavigate();
+    const [inputs, setInputs] = useState({
+      name: "",
+      email: "",
+      password: "",
+      cpass: ""
+    });
+    const [err, setError] = useState(null);
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [cpass, setcpass] = useState('');
-    const [nameError, setNameError] = useState('');
-    const [emailError, setEmailError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const [confirmPasswordError, setConfirmPasswordError] = useState('');
-
+    const handleChange = (e) => {
+      setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+/*
     const validateName = () => {
         if (name.trim() === '') {
           setNameError('Name is required');
@@ -48,40 +50,22 @@ function Signup() {
           setConfirmPasswordError('');
         }
       };
-
+*/
     async function submit(e){
         e.preventDefault();
 
         try{
 
-            await axios.post("https://tubular-cheesecake-ac28b9.netlify.app//signup",{
-                name,email,password,cpass
-                
-            })
-            .then(res=>{
+            await axios.post("https://myguvi-backend.onrender.com/api/user/signup",inputs);
+  /*
                 if(res.data==="exist"){
                     alert("User already exists")
                 }
                 else if(res.data==="notexist"){
-                   // history("/home",{state:{id:name}})
-                   validateName();
-                   validateEmail();
-                   validatePassword();
-                   validateConfirmPassword();
-                 
-                   if (!nameError && !emailError && !passwordError && !confirmPasswordError) {
-                     // Proceed with form submission or further actions
+                   
                      alert('User Successfully Registered');
-                   }
-                    history('/')
-                }
-            })
-            .catch(e=>{
-                alert("wrong details")
-                console.log(e);
-            })
-            
-
+                   }*/
+                    history('/login');
         }
         catch(e){
             console.log(e);
@@ -103,50 +87,42 @@ function Signup() {
             <div className="mb-3">
             <label>Name</label>
             <input
+            required
               type="text"
               className="form-group row"
               placeholder="First name"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              onBlur={validateName}
+              onChange={handleChange}
             />
-            {nameError && <div className="error">{nameError}</div>}
-          </div>
+            </div>
 
           <div className="mb-3">
             <label>Email</label>
             <input
+            required
               type="email"
               className="form-group row"
               placeholder="Email"
-              onChange={(e) => { setEmail(e.target.value) }}
-              value={email}
-              onBlur={validateEmail}
-            />{emailError && <div className="error">{emailError}</div>}
-            </div>
+              onChange={handleChange}
+            /></div>
           <div className="mb-3">
                     <label>Password</label>
                     <input
+                    required
                     type="password"
                     className="form-group row"
                     placeholder="Password"
-                    onChange={(e) => { setPassword(e.target.value) }}
-                    value={password}
-                    onBlur={validatePassword}
+                    onChange={handleChange}
                     />
-                    {passwordError && <div className="error">{passwordError}</div>}
-          </div>
+                     </div>
           <div className="mb-3">
                     <label>Confirm Password</label>
                     <input
+                    required
                     type="password"
                     className="form-group row"
                     placeholder="Confirm Password"
-                    onChange={(e) => { setcpass(e.target.value) }}
-                    value={cpass}
-                    onBlur={validateConfirmPassword}
-                    />       {confirmPasswordError && <div className="error">{confirmPasswordError}</div>} 
-          </div>
+                    onChange={handleChange}
+                    />     </div>
 
           <br /><br />
                 <input type="submit"class="btn btn-primary" onClick={submit} />
