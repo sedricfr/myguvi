@@ -56,7 +56,6 @@ function Signup() {
 
         try{
 
-<<<<<<< HEAD:frontend/src/components/Signup.js
             await axios.post("https://myguvi-backend.onrender.com/api/user/signup",inputs);
   /*
 =======
