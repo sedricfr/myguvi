@@ -6,10 +6,15 @@ const userModel = require("../mongo");
 const register = async (req, res) => {
   try {
     let Body = req.body;
-    const { name,email, password, cpass } = Body;
+    const { name ,email, password, cpass } = Body;
 
     if (!Body.name) {
       return res.status(400).json("Please enter username");
+    }
+
+    const dublicateName = await userModel.findOne({ name: name });
+    if (dublicateName) {
+      return res.status(400).json(" Email Already Exists");
     }
 
     //==================> Email validation <=======================
