@@ -10,9 +10,7 @@ return (
         <img
           src="logo192.png"
           alt="Logo"
-          width="60"
-          height="60"
-          className="d-inline-block align-text-top"
+          className="logo-image "
         />
       </div>
 
