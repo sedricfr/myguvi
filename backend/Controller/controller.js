@@ -1,4 +1,7 @@
 const userModel = require("../mongo");
+var session = require("express-session");
+const { MongoClient } = require("mongodb");
+const uri ="mongodb+srv://vcai:votechain%402023@clustervcai.rdtq9yy.mongodb.net?retryWrites=true&w=majority";
 // const jwt = require("jsonwebtoken");
 // const bcrypt = require("bcrypt");
 
@@ -67,10 +70,9 @@ const register = async (req, res) => {
     //req.body.password = await bcrypt.hash(req.body.password, salt);
 
     let savedData = await userModel.create(Body);
-    
-     return res.status(200).send(getUser._id.toString());
-    } catch (error) {
-      return res.status(500).json(error.message);
+    res.status(201).send({ data: savedData });
+  } catch (error) {
+    return res.status(500).json(error.message);
   }
 };
 
@@ -113,7 +115,11 @@ const loginUser = async function (req, res) {
       {
         httpOnly: true,
       }).status(200).json({User, token}); */
-      return res.status(200).send({ data : getUser });
+     
+      return res.status(200).send({ data: getUser });
+      // req.session.userId = getUser._id.toString();
+      // return res.redirect('/home');
+      
     } catch (error) {
       return res.status(500).json(error.message);
     }
@@ -125,8 +131,41 @@ const logout = (req, res) => {
     
 };
 
+const homer = (req, res) => {
+  const User = req.data;
+ /* const name  = User.name.toString() ;
+  const email = User.email.toString() ;
 
-module.exports = { register, loginUser, logout };
+  const response = {name,email};  */
+  
+//   async function run() {
+
+//   const
+//   const client = new MongoClient(uri);
+//   await client.connect();
+//   const dbName = "react-login-tut";
+//   const collectionName = "employs";
+
+//   // Create references to the database and collection in order to run
+//   // operations on them.
+//   const database = client.db(dbName);
+//   const collection = database.collection(collectionName);
+//   const findOneQuery = { _id: userId};
+//     const findOneResult = await collection.findOne(findOneQuery);
+//     if (findOneResult === null) {
+//       console.log("Couldn't find any recipes that contain 'potato' as an ingredient.\n");
+//     } else {
+//       console.log(`Found a account with ${_id} `);
+//       name = findOneResult.name;
+//       email = findOneResult.email;
+//     }
+// }
+  return res.status(200).send({ data: User });
+
+};
+
+
+module.exports = { register, loginUser, logout,homer };
 
 /*
 
