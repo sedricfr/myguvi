@@ -1,9 +1,4 @@
 const userModel = require("../mongo");
-var session = require("express-session");
-const { MongoClient } = require("mongodb");
-const uri ="mongodb+srv://vcai:votechain%402023@clustervcai.rdtq9yy.mongodb.net?retryWrites=true&w=majority";
-// const jwt = require("jsonwebtoken");
-// const bcrypt = require("bcrypt");
 
 //==================> Create user <=======================
 const register = async (req, res) => {
@@ -66,8 +61,7 @@ const register = async (req, res) => {
         );
     }
 
-    //const salt = await bcrypt.genSalt(10);
-    //req.body.password = await bcrypt.hash(req.body.password, salt);
+   
 
     let savedData = await userModel.create(Body);
     res.status(201).send({ data: savedData });
@@ -94,31 +88,12 @@ const loginUser = async function (req, res) {
     let getUser = await userModel.findOne({  email });
     if (!getUser) return res.status(401).json("Email or Password is incorrect.");
     
-   // let matchPassword = await bcrypt.compare(password, getUser.password);
+   
     let matchPassword = (password === getUser.password);
     if (!matchPassword) return res.status(401).json("Email or Password is incorrect.");
     
-    // 
-    /* token
-    
-    const token = jwt.sign(
-      {
-        userId: getUser._id.toString(),
-      },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-      );
-      const { newPassword, ...other } = getUser
-      let User = getUser
-      
-      res.cookie("access_token", token, 
-      {
-        httpOnly: true,
-      }).status(200).json({User, token}); */
-     
       return res.status(200).send({ data: getUser });
-      // req.session.userId = getUser._id.toString();
-      // return res.redirect('/home');
+      
       
     } catch (error) {
       return res.status(500).json(error.message);
@@ -131,81 +106,6 @@ const logout = (req, res) => {
     
 };
 
-const homer = (req, res) => {
-  const User = req.data;
- /* const name  = User.name.toString() ;
-  const email = User.email.toString() ;
 
-  const response = {name,email};  */
-  
-//   async function run() {
-
-//   const
-//   const client = new MongoClient(uri);
-//   await client.connect();
-//   const dbName = "react-login-tut";
-//   const collectionName = "employs";
-
-//   // Create references to the database and collection in order to run
-//   // operations on them.
-//   const database = client.db(dbName);
-//   const collection = database.collection(collectionName);
-//   const findOneQuery = { _id: userId};
-//     const findOneResult = await collection.findOne(findOneQuery);
-//     if (findOneResult === null) {
-//       console.log("Couldn't find any recipes that contain 'potato' as an ingredient.\n");
-//     } else {
-//       console.log(`Found a account with ${_id} `);
-//       name = findOneResult.name;
-//       email = findOneResult.email;
-//     }
-// }
-  return res.status(200).send({ data: User });
-
-};
-
-
-module.exports = { register, loginUser, logout,homer };
-
-/*
-
- //==================> Phone validation <=======================
- if (!Body.phone) {
-    return res.status(400).json("Please enter phone number");
-  }
-  const Phoneregx = /^[0-9]{10}$/;
-  let Phone = Phoneregx.test(Body.phone);
-  if (!Phone) {
-    return res.status(400).json("Please enter valid Phone number.");
-  }
-
-  //<===================
-  const dublicatePhone = await userModel.findOne({ phone });
-  if (dublicatePhone) {
-    return res.status(400).json(" Number Already Exists");
-  }
-//==================> Update user <=======================
-const updateUser = async (req,res) => {
-    try {
-      let body = req.body
-      
-        const updatedUser = await userModel.updateOne({_id: req.params.id}, {$set : body})
-        return res.status(200).json(updatedUser)
-    } catch (error) {
-        return res.status(500).json(error.message);
-    }
-}
-
-
-//==================> Delete user <=======================
-const deleteUser = async (req,res) => {
-    try {
-        
-      const deletedUser = await userModel.deleteOne({_id : req.params.id})
-      return res.status(200).json(deletedUser)
-      
-    } catch (error) {
-        return res.status(500).json(error.message);
-    }
-}*/
+module.exports = { register, loginUser, logout };
 
