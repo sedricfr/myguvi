@@ -9,7 +9,7 @@ app.use(express.json())
 
 app.use(cors({ origin:'https://tubular-cheesecake-ac28b9.netlify.app'}))
 
-mongoose.connect(MONGO_CONNECTION,{useNewUrlParser:true})
+mongoose.connect(MONGO_CONNECTION)
 .then(()=>{
     console.log("Connected MongoDB Successfully !!")
 }).catch(err=>{
@@ -17,6 +17,7 @@ mongoose.connect(MONGO_CONNECTION,{useNewUrlParser:true})
 })
 
 app.use("/",route)
+
 
 
 app.listen(port, () => {
